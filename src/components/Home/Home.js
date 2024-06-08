@@ -1,6 +1,7 @@
 import React from 'react'
 import Form from '../Form/Form'
-import Cards from '../Cards/Cards'
+import Cards from '../Cards/Cards';
+import './Home.css';
 
 const Home = () => {
   return (
