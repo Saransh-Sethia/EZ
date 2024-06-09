@@ -47,3 +47,43 @@
     display: grid;
    grid-template-columns: auto auto auto;
 }
+
+@media screen and (max-width: 480px){
+    .cards-container{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cards{
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        justify-content: center;
+        align-self: center;
+        border: 1px solid #1b112e;
+        background-color: #1b112e;
+        padding: 20px 70px 20px 70px;
+        margin: 10px;
+        max-width: 200px;
+        border-radius: 8px;
+    }
+}
+
+@media screen and (max-width: 720px){
+
+.cards-container{
+    display: flex;
+    flex-direction: column;
+}
+    .cards{
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        justify-content: center;
+        align-self: center;
+        border: 1px solid #1b112e;
+        background-color: #1b112e;
+        padding: 20px 70px 20px 70px;
+        margin: 10px;
+        max-width: 200px;
+        border-radius: 8px;
+    }
+}
