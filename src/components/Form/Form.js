@@ -7,25 +7,38 @@ const Form = () => {
     email: ""
   });
 
+  let rejectedDomain = "ez.works";
+
   const handleChange = (e) => {
     const {name, value} = e.target
     setFormData((prev) => ({...prev, [name]:value}))
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (formData) => {
     try {
-      const data = {
-        email: formData.email
+      if(formData.email === ""){
+        alert("Kindly Enter Email")
+        return;
       }
-      const response = await axios.post("https://34.225.132.160:8002/api",data);
-      if (response.status === 201) {
-        console.log("response", response.status.message);
-        setFormData({email: response.status.message})
+      const response = await axios.post("http://34.225.132.160:8002/api",{email: formData.email});
+
+      let splitArr = formData.email.split("@");
+
+      if(splitArr[1] === rejectedDomain) {
+setFormData({email: response.status})
+      } else {
+        console.log('response',response)
+        setFormData({email: response.data.message})
       }
+      
+        // console.log("response", response);
+        
+      
     } catch (error) {
-      if (error?.response?.data?.message) {
-        console.log("Invalid Credentials");
-      }
+    if(error.response && error.response.message === 422){
+
+      console.log('error',error)
+    }
     }
   };
 
@@ -40,7 +53,7 @@ const Form = () => {
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
       </p>
-      <form className="form" onSubmit={handleSubmit}>
+      <div className="form" >
         <input
           className="input"
           placeholder="  Email Address"
@@ -48,8 +61,8 @@ const Form = () => {
           value={formData.email}
           onChange={(e)=>handleChange(e)}
         />
-        <input type="submit" className="button" value="Contact Me" />
-      </form>
+        <button className="button" onClick={()=>handleSubmit(formData)} >Contact Me</button>
+      </div>
     </div>
   );
 };
